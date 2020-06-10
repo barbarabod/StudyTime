@@ -1,3 +1,21 @@
 <resources>
-    <string name="app_name">StudyTimer</string>
+    <string name="app_name">StudyTime</string>
+    <string name="start_button">Start</string>
+    <string name="settings">Ustawienia</string>
+    <string name="history">Śledź postępy</string>
+    <string name="title_activity_settings">Settings</string>
+
+    <!-- Preference Titles -->
+    <string name="time_header">Zarządzaj czasem</string>
+
+    <!-- Time Preferences -->
+    <string name="study_time_title">Zmień czas nauki</string>
+    <string name="break_time_title">Zmień czas przerwy</string>
+
+    <string name="button_stop">Stop</string>
+    <string name="button_pause">Pauza</string>
+    <string name="information_study">Ucz się!\nDo przerwy zostało:</string>
+    <string name="information_break">Trwa przerwa.\nPowróć do nauki za:</string>
+    <string name="information_stop">Sesja została przerwana.\nAby rozpocząć nową sesję wciśnij start.</string>
+
 </resources>
