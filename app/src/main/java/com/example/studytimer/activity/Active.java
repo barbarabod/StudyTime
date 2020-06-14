@@ -2,7 +2,9 @@ package com.example.studytimer.activity;
 
 import android.os.Bundle;
 import android.view.View;
+
 import androidx.appcompat.app.AppCompatActivity;
+
 import com.example.studytimer.R;
 
 public class Active extends AppCompatActivity {
