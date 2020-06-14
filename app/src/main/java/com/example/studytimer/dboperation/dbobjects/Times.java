@@ -1,7 +1,6 @@
 package com.example.studytimer.dboperation.dbobjects;
 
 import com.example.studytimer.dboperation.TypeOfAction;
-import com.j256.ormlite.field.DataType;
 import com.j256.ormlite.field.DatabaseField;
 import com.j256.ormlite.table.DatabaseTable;
 
@@ -13,10 +12,10 @@ public class Times {
     @DatabaseField(generatedId = true)
     private int Id;
 
-    @DatabaseField(dataType = DataType.JAVA_DATE, canBeNull = false)
+    @DatabaseField(canBeNull = false)
     private Date start;
 
-    @DatabaseField(dataType = DataType.JAVA_DATE, canBeNull = false)
+    @DatabaseField(canBeNull = false)
     private Date stop;
 
     @DatabaseField(canBeNull = false)
