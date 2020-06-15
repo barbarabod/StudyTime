@@ -1,9 +1,14 @@
 package com.example.studytimer.activity;
+
+import android.content.Context;
 import android.os.Bundle;
 import android.os.CountDownTimer;
+import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studytimer.R;
 import com.example.studytimer.dboperation.DBHelper;
@@ -13,8 +18,6 @@ import com.example.studytimer.dboperation.dbobjects.Times;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Locale;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 public class Active extends AppCompatActivity {
 
@@ -34,9 +37,9 @@ public class Active extends AppCompatActivity {
         dbHelper = new DBHelper(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
-        timeText = (TextView)findViewById(R.id.text_view_countdown);
-        infoText = (TextView)findViewById(R.id.text_information);
-        controlButton = (Button)findViewById(R.id.button_stop);
+        timeText = findViewById(R.id.text_view_countdown);
+        infoText = findViewById(R.id.text_information);
+        controlButton = findViewById(R.id.button_stop);
         timeText.setVisibility(View.INVISIBLE);
         controlButton.setText("Start");
         isOnPause = false;
@@ -74,6 +77,9 @@ public class Active extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                long mills = 500L;
+                Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
+
                 if(isOnPause){
                     try {
                         dbHelper.create(new Times(TypeOfAction.PAUSE,new Date(dataBaseStartTime), new Date(System.currentTimeMillis())));
@@ -91,6 +97,9 @@ public class Active extends AppCompatActivity {
                     infoText.setText("Przerwa!");
                 }
                 isOnPause = !isOnPause;
+                if (vibrator.hasVibrator()) {
+                    vibrator.vibrate(mills);
+                }
                 startTimer();
             }
         }.start();
