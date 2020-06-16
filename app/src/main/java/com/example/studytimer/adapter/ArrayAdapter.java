@@ -43,7 +43,13 @@ public class ArrayAdapter extends RecyclerView.Adapter<ArrayAdapter.ViewHolder> 
     @Override
     public void onBindViewHolder(final ViewHolder holder, final int listPosition) {
         TextView item = holder.item;
-        item.setText(new String(itemList.get(listPosition).getStart().toString()+" "+itemList.get(listPosition).getStop().toString()));
+        StringBuilder sb = new StringBuilder();
+        sb.append(itemList.get(listPosition).getStart().getDate()).append(".");
+        sb.append(itemList.get(listPosition).getStart().getMonth()).append(".");
+        sb.append(itemList.get(listPosition).getStart().getYear()+1900).append("       ");
+        sb.append((itemList.get(listPosition).getStop().getTime()-itemList.get(listPosition).getStart().getTime())/60000).append(" min ");
+        sb.append((itemList.get(listPosition).getStop().getTime()-itemList.get(listPosition).getStart().getTime())/1000 % 60).append(" s");
+        item.setText(sb.toString());
     }
 
     // Static inner class to initialize the views of rows
