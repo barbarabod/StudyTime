@@ -1,14 +1,13 @@
 package com.example.studytimer.activity;
 
 import android.content.Context;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.CountDownTimer;
 import android.os.Vibrator;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.studytimer.R;
 import com.example.studytimer.dboperation.DBHelper;
@@ -18,6 +17,9 @@ import com.example.studytimer.dboperation.dbobjects.Times;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 public class Active extends AppCompatActivity {
 
@@ -31,10 +33,13 @@ public class Active extends AppCompatActivity {
     private long timeLeftInMillis = 60000;
     private long endTime;
     private boolean isOnPause;
+    private SharedPreferences sharedPreferences;
+    private boolean terminateTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         dbHelper = new DBHelper(this);
+        sharedPreferences = PreferenceManager.getDefaultSharedPreferences(this);
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_active);
         timeText = findViewById(R.id.text_view_countdown);
@@ -57,11 +62,13 @@ public class Active extends AppCompatActivity {
     }
 
     private void startTimer(){
+        terminateTimer = false;
         if(isOnPause){
-            timeLeftInMillis = 30000;
+            timeLeftInMillis = Long.parseLong(sharedPreferences.getString("break_time", "10000")) * 1000;
         }
         else{
-            timeLeftInMillis = 60000;
+            timeLeftInMillis = Long.parseLong(sharedPreferences.getString("study_time", "10000")) * 1000;
+            infoText.setText("Ucz się!\n Do przerwy zostało:");
         }
         dataBaseStartTime = System.currentTimeMillis();
         endTime = System.currentTimeMillis() + timeLeftInMillis;
@@ -77,6 +84,10 @@ public class Active extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                if(terminateTimer){
+                    countDownTimer.cancel();
+                    return;
+                }
                 long mills = 500L;
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -107,6 +118,7 @@ public class Active extends AppCompatActivity {
         isTimerRunning = true;
     }
     private void stopTimer(){
+        terminateTimer = true;
         countDownTimer.cancel();
         isTimerRunning = false;
         if(isOnPause){
