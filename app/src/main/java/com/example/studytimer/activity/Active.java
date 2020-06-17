@@ -9,9 +9,6 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
-import androidx.appcompat.app.AppCompatActivity;
-import androidx.preference.PreferenceManager;
-
 import com.example.studytimer.R;
 import com.example.studytimer.dboperation.DBHelper;
 import com.example.studytimer.dboperation.TypeOfAction;
@@ -20,6 +17,9 @@ import com.example.studytimer.dboperation.dbobjects.Times;
 import java.sql.SQLException;
 import java.util.Date;
 import java.util.Locale;
+
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.preference.PreferenceManager;
 
 public class Active extends AppCompatActivity {
 
@@ -34,6 +34,7 @@ public class Active extends AppCompatActivity {
     private long endTime;
     private boolean isOnPause;
     private SharedPreferences sharedPreferences;
+    private boolean terminateTimer;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -61,6 +62,7 @@ public class Active extends AppCompatActivity {
     }
 
     private void startTimer(){
+        terminateTimer = false;
         if(isOnPause){
             timeLeftInMillis = Long.parseLong(sharedPreferences.getString("break_time", "10000")) * 1000;
         }
@@ -82,6 +84,10 @@ public class Active extends AppCompatActivity {
 
             @Override
             public void onFinish() {
+                if(terminateTimer){
+                    countDownTimer.cancel();
+                    return;
+                }
                 long mills = 500L;
                 Vibrator vibrator = (Vibrator) getSystemService(Context.VIBRATOR_SERVICE);
 
@@ -112,6 +118,7 @@ public class Active extends AppCompatActivity {
         isTimerRunning = true;
     }
     private void stopTimer(){
+        terminateTimer = true;
         countDownTimer.cancel();
         isTimerRunning = false;
         if(isOnPause){
