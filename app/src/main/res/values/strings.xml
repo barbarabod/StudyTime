@@ -12,10 +12,9 @@
     <string name="study_time_title">Zmień czas nauki</string>
     <string name="break_time_title">Zmień czas przerwy</string>
 
-    <string name="button_stop">Stop</string>
-    <string name="button_pause">Pauza</string>
-    <string name="information_study">Ucz się!\nDo przerwy zostało:</string>
-    <string name="information_break">Trwa przerwa.\nPowróć do nauki za:</string>
-    <string name="information_stop">Sesja została przerwana.\nAby rozpocząć nową sesję wciśnij start.</string>
+    <string name="button_stop">Koniec</string>
+    <string name="information_start">Zacznij naukę</string>
+    <string name="information_study">Ucz się! Do przerwy zostało:</string>
+    <string name="information_break">Przerwa!</string>
 
 </resources>

@@ -46,9 +46,9 @@ public class Active extends AppCompatActivity {
         infoText = findViewById(R.id.text_information);
         controlButton = findViewById(R.id.button_stop);
         timeText.setVisibility(View.INVISIBLE);
-        controlButton.setText("Start");
+        controlButton.setText(R.string.start_button);
         isOnPause = false;
-        infoText.setText("Zacznij naukę");
+        infoText.setText(R.string.information_start);
     }
 
     public void onStartButton(View view) {
@@ -68,7 +68,7 @@ public class Active extends AppCompatActivity {
         }
         else{
             timeLeftInMillis = Long.parseLong(sharedPreferences.getString("study_time", "10000")) * 1000;
-            infoText.setText("Ucz się! Do przerwy zostało:");
+            infoText.setText(R.string.information_study);
         }
         dataBaseStartTime = System.currentTimeMillis();
         endTime = System.currentTimeMillis() + timeLeftInMillis;
@@ -78,7 +78,7 @@ public class Active extends AppCompatActivity {
             public void onTick(long millisUntilFinished) {
                 timeLeftInMillis = millisUntilFinished;
                 updateCountdownText();
-                controlButton.setText("Koniec");
+                controlButton.setText(R.string.button_stop);
 
             }
 
@@ -97,7 +97,7 @@ public class Active extends AppCompatActivity {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    infoText.setText("Ucz się!\n Do przerwy zostało:");
+                    infoText.setText(R.string.information_study);
                 }
                 else{
                     try {
@@ -105,7 +105,7 @@ public class Active extends AppCompatActivity {
                     } catch (SQLException e) {
                         e.printStackTrace();
                     }
-                    infoText.setText("Przerwa!");
+                    infoText.setText(R.string.information_break);
                 }
                 isOnPause = !isOnPause;
                 if (vibrator.hasVibrator()) {
@@ -136,8 +136,8 @@ public class Active extends AppCompatActivity {
             }
         }
         isOnPause = false;
-        infoText.setText("Zacznij naukę");
-        controlButton.setText("Start");
+        infoText.setText(R.string.information_start);
+        controlButton.setText(R.string.start_button);
         timeText.setVisibility(View.INVISIBLE);
 
     }
