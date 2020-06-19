@@ -68,7 +68,7 @@ public class Active extends AppCompatActivity {
         }
         else{
             timeLeftInMillis = Long.parseLong(sharedPreferences.getString("study_time", "10000")) * 1000;
-            infoText.setText("Ucz się!\n Do przerwy zostało:");
+            infoText.setText("Ucz się! Do przerwy zostało:");
         }
         dataBaseStartTime = System.currentTimeMillis();
         endTime = System.currentTimeMillis() + timeLeftInMillis;

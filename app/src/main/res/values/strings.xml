@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">StudyTime</string>
+    <string name="app_name">Study Time</string>
     <string name="start_button">Start</string>
     <string name="settings">Ustawienia</string>
     <string name="history">Śledź postępy</string>
