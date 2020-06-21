@@ -61,12 +61,12 @@ public class HistoryActivity  extends AppCompatActivity {
 
         StringBuilder sb = new StringBuilder();
         sb.append("Łączny czas nauki to: ");
-        sb.append(allWorkTime/3600000).append(" h ").append(allWorkTime/60000).append(" min ").append(allWorkTime/1000 % 60).append(" s");
+        sb.append(allWorkTime/3600000).append(" h ").append(allWorkTime/60000 % 60).append(" min ").append(allWorkTime/1000 % 60).append(" s");
         timeSummedUp.setText(sb.toString());
 
         sb = new StringBuilder();
         sb.append("Dzisiaj: \n");
-        sb.append(WorkTimeToday/3600000).append(" h ").append(WorkTimeToday/60000).append(" min ").append(WorkTimeToday/1000 % 60).append(" s");
+        sb.append(WorkTimeToday/3600000).append(" h ").append(WorkTimeToday/60000 % 60).append(" min ").append(WorkTimeToday/1000 % 60).append(" s");
 
         timeToday.setText(sb.toString());
     }
